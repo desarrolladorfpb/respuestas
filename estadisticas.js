@@ -15,8 +15,6 @@ function PuestoPeligrar(genero,vejez, visual){
 
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
-        console.log(edad)
-        console.log(vejez)
         const respuesta = list[i].getElementsByTagName("td")[4].innerText;
         if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){
             
@@ -57,15 +55,9 @@ function PuestoPeligrar(genero,vejez, visual){
     
     document.getElementById("totalrespuestas").innerText=" : "+ total;
     document.getElementById("porcentajeFuturo").innerText=" "+ porcentajes[0].toFixed(1)+"% ";
-    document.getElementById("porcentajePasado").innerText=" "+ porcentajes[2].toFixed(2)+"% ";
+    document.getElementById("porcentajePasado").innerText=" "+ porcentajes[2].toFixed(1)+"% ";
     document.getElementById("porcentajePresente").innerText=" "+ porcentajes[1].toFixed(1)+"% ";
     document.getElementById("porcentajeNo").innerText=" "+ porcentajes[3].toFixed(1)+"% ";
-    console.log(genero+":")
-    console.log("futuro"+ futuro*100/total)
-    console.log("presente"+ presente*100/total)
-    console.log("pasado"+ pasado*100/total)
-    console.log("no"+ no*100/total)
-    console.log("-------------------------------")
     }
 PuestoPeligrar("Todos.", "Todos.", "pie")
 
@@ -79,6 +71,7 @@ document.getElementById("eligeSexo").addEventListener("change",(event)=>{
     }
 },false)
 document.getElementById("eligeVisual").addEventListener("change", (event)=>{
+    console.log(event.target.value)
     PuestoPeligrar( document.getElementById("eligeSexo").value, document.getElementById("eligeEdad").value, event.target.value)
 })
 document.getElementById("eligeEdad").addEventListener("change",(event)=>{
