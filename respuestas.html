@@ -30,14 +30,25 @@
         <option>Mayor de 60.</option>
       </select>
   </div>
+
   <div class="row justify-content-center">
-    Número de respuestas:
+    Número de respuestas<div id="totalrespuestas" style="font-weight: bolder;"> </div>
   </div>
   <div class="row justify-content-center">
-    Si, mi trabajo futuro: 15% / Si, mi trabajo presente: 15% / Si mi trabajo pasado 20% / No: 10%
+   <span style="color:rgb(255, 99, 132)"> Si, mi trabajo futuro:<span id="porcentajeFuturo" style="font-weight: bolder;"></span> </span>
+   <span style="color:rgb(54, 162, 235)"> / Si, mi trabajo presente: <span id="porcentajePresente" style="font-weight: bolder;"></span> </span>
+   <span style="color:rgb(255, 160, 5)">/ Si mi trabajo pasado: <span id="porcentajePasado" style="font-weight: bolder;"></span>  </span> 
+   <span style="color:rgb(0, 205, 86)"> / No: <span id="porcentajeNo" style="font-weight: bolder;"></span> </span>
   </div>
-  
     <div id="generador"></div>
+    <div class="row justify-content-center">
+    visualización: <select id="eligeVisual" style="width: 10%; margin-left: 2%;">
+      <option selected>pie</option>
+      <option>bar</option>
+      <option>doughnut</option>
+    </select>
+  </div>
+  </div>
   </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="./estadisticas.js"></script>
