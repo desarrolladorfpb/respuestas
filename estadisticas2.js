@@ -1,7 +1,7 @@
 
 // ir generando canvas
 var nc = 0; 
-function PuestoPeligrar2(genero,vejez, visual){
+function PuestoPeligrar2(genero,vejez, visual, sectorElegido){
     
     nc++;
     document.getElementById("generador2").innerHTML='<canvas style="opacity:1;z-index:9999;" id="myChart2'+nc+'"></canvas>'
@@ -16,7 +16,8 @@ function PuestoPeligrar2(genero,vejez, visual){
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
         const respuesta = list[i].getElementsByTagName("td")[6].innerText;
-        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){
+        let sector = list[i].getElementsByTagName("td")[3].innerText;
+        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")&&(sector==sectorElegido||sectorElegido=="Todos.")){
             
             total++;
             if(respuesta=="Bastante probable."){
@@ -60,26 +61,37 @@ function PuestoPeligrar2(genero,vejez, visual){
     document.getElementById("porcentajeNo2").innerText=" "+ porcentajes[3].toFixed(1)+"% ";
 
     }
-PuestoPeligrar2("Todos.", "Todos.", "pie")
+PuestoPeligrar2("Todos.", "Todos.", "pie", "Todos.")
 
 var eligeSexo2= document.getElementById("eligeSexo2");
 var eligeEdad2=document.getElementById("eligeEdad2");
 var eligeVisual2 = document.getElementById("eligeVisual2");
+var eligeSector2 = document.getElementById("eligeSector2");
 
 eligeSexo2.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
         event.target.value=""
     }
-    PuestoPeligrar2(event.target.value, eligeEdad2.value, eligeVisual2.value)
+    PuestoPeligrar2(event.target.value, eligeEdad2.value, eligeVisual2.value, eligeSector2.value)
     if(event.target.value==""){
         event.target.value="No ha contestado."
     }
 },false)
 eligeVisual2.addEventListener("change", (event)=>{
-    PuestoPeligrar2( eligeSexo2.value, eligeEdad2.value, event.target.value)
+    PuestoPeligrar2( eligeSexo2.value, eligeEdad2.value, event.target.value, eligeSector2.value)
 })
 eligeEdad2.addEventListener("change",(event)=>{
-    console.log(eligeVisual.value)
-    PuestoPeligrar2( eligeSexo2.value, event.target.value, eligeVisual2.value)
+    PuestoPeligrar2( eligeSexo2.value, event.target.value, eligeVisual2.value, eligeSector2.value)
 },false)
+
+eligeSector2.addEventListener("change", (event)=>{
+    if(event.target.value=="No ha contestado"){
+        event.target.value=""
+    }
+    PuestoPeligrar2( eligeSexo2.value, eligeEdad2.value, eligeVisual2.value, event.target.value)
+    if(event.target.value==""){
+        event.target.value="No ha contestado"
+    }
+
+})
 

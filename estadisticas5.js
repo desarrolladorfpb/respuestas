@@ -1,7 +1,7 @@
 
 // ir generando canvas
 var nc = 0; 
-function PuestoPeligrar5(genero,vejez, visual){
+function PuestoPeligrar5(genero, vejez, visual, sectorElegido){
     
     nc++;
     document.getElementById("generador5").innerHTML='<canvas style="opacity:1;z-index:9999;" id="myChart5'+nc+'"></canvas>'
@@ -15,7 +15,8 @@ function PuestoPeligrar5(genero,vejez, visual){
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
         const respuesta = list[i].getElementsByTagName("td")[9].innerText;
-        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){
+        let sector = list[i].getElementsByTagName("td")[3].innerText;
+        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")&&(sector==sectorElegido||sectorElegido=="Todos.")){
             
             total++;
             if(respuesta=="Con la persona."){
@@ -55,11 +56,12 @@ function PuestoPeligrar5(genero,vejez, visual){
     document.getElementById("porcentajeNo5").innerText=" "+ porcentajes[2].toFixed(1)+"% ";
 
     }
-PuestoPeligrar5("Todos.", "Todos.", "pie")
+PuestoPeligrar5("Todos.", "Todos.", "pie", "Todos.")
 
 var eligeSexo5= document.getElementById("eligeSexo5");
 var eligeEdad5=document.getElementById("eligeEdad5");
 var eligeVisual5 = document.getElementById("eligeVisual5");
+var eligeSector5 = document.getElementById("eligeSector5");
 
 eligeSexo5.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
@@ -77,4 +79,15 @@ eligeEdad5.addEventListener("change",(event)=>{
     console.log(eligeVisual.value)
     PuestoPeligrar5( eligeSexo5.value, event.target.value, eligeVisual5.value)
 },false)
+
+eligeSector5.addEventListener("change", (event)=>{
+    if(event.target.value=="No ha contestado"){
+        event.target.value=""
+    }
+    PuestoPeligrar5( eligeSexo5.value, eligeEdad5.value, eligeVisual5.value, event.target.value)
+    if(event.target.value==""){
+        event.target.value="No ha contestado"
+    }
+
+})
 

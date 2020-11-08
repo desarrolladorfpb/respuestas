@@ -1,7 +1,7 @@
 
 // ir generando canvas
 var nc = 0; 
-function PuestoPeligrar3(genero,vejez, visual){
+function PuestoPeligrar3(genero,vejez, visual, sectorElegido){
     
     nc++;
     document.getElementById("generador3").innerHTML='<canvas style="opacity:1;z-index:9999;" id="myChart3'+nc+'"></canvas>'
@@ -16,7 +16,9 @@ function PuestoPeligrar3(genero,vejez, visual){
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
         const respuesta = list[i].getElementsByTagName("td")[7].innerText;
-        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){          
+        let sector = list[i].getElementsByTagName("td")[3].innerText;
+
+        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")&&(sector==sectorElegido||sectorElegido=="Todos.")){          
             total++;
             splitearRespuesta = respuesta.split(",")
             splitearRespuesta.forEach(element => {
@@ -63,11 +65,12 @@ function PuestoPeligrar3(genero,vejez, visual){
     document.getElementById("porcentajeOtro").innerText=" "+ porcentajes[3].toFixed(1)+"% ("+otros+")";
 
     }
-PuestoPeligrar3("Todos.", "Todos.", "bar")
+PuestoPeligrar3("Todos.", "Todos.", "bar", "Todos.")
 
 var eligeSexo3= document.getElementById("eligeSexo3");
 var eligeEdad3=document.getElementById("eligeEdad3");
 var eligeVisual3 = document.getElementById("eligeVisual3");
+var eligeSector3 = document.getElementById("eligeSector3");
 
 eligeSexo3.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
@@ -84,4 +87,15 @@ eligeVisual3.addEventListener("change", (event)=>{
 eligeEdad3.addEventListener("change",(event)=>{
     PuestoPeligrar3( eligeSexo3.value, event.target.value, eligeVisual3.value)
 },false)
+
+eligeSector3.addEventListener("change", (event)=>{
+    if(event.target.value=="No ha contestado"){
+        event.target.value=""
+    }
+    PuestoPeligrar3( eligeSexo3.value, eligeEdad3.value, eligeVisual3.value, event.target.value)
+    if(event.target.value==""){
+        event.target.value="No ha contestado"
+    }
+
+})
 

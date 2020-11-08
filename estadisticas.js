@@ -1,7 +1,22 @@
 
 // ir generando canvas
 var nc = 0; 
-function PuestoPeligrar(genero,vejez, visual){
+function recogeSectores(){
+    let lista = document.getElementsByTagName("tr");
+    
+    sectores=[];
+    for (let index = 3; index < lista.length; index++) {
+        let sector = lista[index].getElementsByTagName("td")[3].innerText;
+        if(!sectores.includes(sector)){
+            sectores.push(sector);
+        }
+    }
+   
+   
+    console.log(sectores)
+}
+recogeSectores()
+function PuestoPeligrar(genero,vejez, visual, sectorElegido){
     
     nc++;
     document.getElementById("generador").innerHTML='<canvas style="opacity:1;z-index:9999;" id="myChart'+nc+'"></canvas>'
@@ -15,8 +30,9 @@ function PuestoPeligrar(genero,vejez, visual){
 
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
+        let sector = list[i].getElementsByTagName("td")[3].innerText;
         const respuesta = list[i].getElementsByTagName("td")[4].innerText;
-        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){
+        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")&&(sector==sectorElegido||sectorElegido=="Todos.")){
             
             total++;
             if(respuesta=="Si, mi trabajo pasado."){
@@ -59,22 +75,33 @@ function PuestoPeligrar(genero,vejez, visual){
     document.getElementById("porcentajePresente").innerText=" "+ porcentajes[1].toFixed(1)+"% ";
     document.getElementById("porcentajeNo").innerText=" "+ porcentajes[3].toFixed(1)+"% ";
     }
-PuestoPeligrar("Todos.", "Todos.", "pie")
+PuestoPeligrar("Todos.", "Todos.", "pie", "Todos.")
 
 document.getElementById("eligeSexo").addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
         event.target.value=""
     }
-    PuestoPeligrar(event.target.value, document.getElementById("eligeEdad").value, document.getElementById("eligeVisual").value)
+    PuestoPeligrar(event.target.value, document.getElementById("eligeEdad").value, document.getElementById("eligeVisual").value, document.getElementById("eligeSector").value)
     if(event.target.value==""){
         event.target.value="No ha contestado."
     }
 },false)
 document.getElementById("eligeVisual").addEventListener("change", (event)=>{
-    console.log(event.target.value)
-    PuestoPeligrar( document.getElementById("eligeSexo").value, document.getElementById("eligeEdad").value, event.target.value)
+    PuestoPeligrar( document.getElementById("eligeSexo").value, document.getElementById("eligeEdad").value, event.target.value, document.getElementById("eligeSector").value)
 })
+
 document.getElementById("eligeEdad").addEventListener("change",(event)=>{
-    PuestoPeligrar( document.getElementById("eligeSexo").value, event.target.value, document.getElementById("eligeVisual").value)
+    PuestoPeligrar( document.getElementById("eligeSexo").value, event.target.value, document.getElementById("eligeVisual").value, document.getElementById("eligeSector").value)
 },false)
+
+document.getElementById("eligeSector").addEventListener("change", (event)=>{
+    if(event.target.value=="No ha contestado"){
+        event.target.value=""
+    }
+    PuestoPeligrar( document.getElementById("eligeSexo").value, document.getElementById("eligeEdad").value,document.getElementById("eligeVisual").value, event.target.value)
+    if(event.target.value==""){
+        event.target.value="No ha contestado"
+    }
+
+})
 

@@ -1,7 +1,7 @@
 
 // ir generando canvas
 var nc = 0; 
-function PuestoPeligrar4(genero,vejez, visual){
+function PuestoPeligrar4(genero,vejez, visual, sectorElegido){
     
     nc++;
     document.getElementById("generador4").innerHTML='<canvas style="opacity:1;z-index:9999;" id="myChart4'+nc+'"></canvas>'
@@ -15,7 +15,9 @@ function PuestoPeligrar4(genero,vejez, visual){
         const sexo = list[i].getElementsByTagName("td")[2].innerHTML;
         const edad = list[i].getElementsByTagName("td")[1].innerHTML;
         const respuesta = list[i].getElementsByTagName("td")[8].innerText;
-        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")){
+        let sector = list[i].getElementsByTagName("td")[3].innerText;
+
+        if((sexo==genero||genero=="Todos.")&&(edad==vejez||vejez=="Todos.")&&(sector==sectorElegido||sectorElegido=="Todos.")){
             
             total++;
             if(respuesta=="Si, no se deberían automatizar procesos que requieran empatía."){
@@ -55,26 +57,38 @@ function PuestoPeligrar4(genero,vejez, visual){
     document.getElementById("porcentajeTime").innerText=" "+ porcentajes[2].toFixed(1)+"% ";
 
     }
-PuestoPeligrar4("Todos.", "Todos.", "pie")
+PuestoPeligrar4("Todos.", "Todos.", "pie", "Todos.")
 
 var eligeSexo4= document.getElementById("eligeSexo4");
 var eligeEdad4=document.getElementById("eligeEdad4");
 var eligeVisual4 = document.getElementById("eligeVisual4");
+var eligeSector4 = document.getElementById("eligeSector4");
 
 eligeSexo4.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
         event.target.value=""
     }
-    PuestoPeligrar4(event.target.value, eligeEdad4.value, eligeVisual4.value)
+    PuestoPeligrar4(event.target.value, eligeEdad4.value, eligeVisual4.value, eligeSector4.value)
     if(event.target.value==""){
         event.target.value="No ha contestado."
     }
 },false)
 eligeVisual4.addEventListener("change", (event)=>{
-    PuestoPeligrar4( eligeSexo4.value, eligeEdad4.value, event.target.value)
+    PuestoPeligrar4( eligeSexo4.value, eligeEdad4.value, event.target.value, eligeSector4.value)
 })
 eligeEdad4.addEventListener("change",(event)=>{
     console.log(eligeVisual.value)
-    PuestoPeligrar4( eligeSexo4.value, event.target.value, eligeVisual4.value)
+    PuestoPeligrar4( eligeSexo4.value, event.target.value, eligeVisual4.value, eligeSector4.value)
 },false)
+
+eligeSector4.addEventListener("change", (event)=>{
+    if(event.target.value=="No ha contestado"){
+        event.target.value=""
+    }
+    PuestoPeligrar4( eligeSexo4.value, eligeEdad4.value, eligeVisual4.value, event.target.value)
+    if(event.target.value==""){
+        event.target.value="No ha contestado"
+    }
+
+})
 
