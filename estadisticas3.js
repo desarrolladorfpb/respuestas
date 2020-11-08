@@ -76,16 +76,16 @@ eligeSexo3.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
         event.target.value=""
     }
-    PuestoPeligrar3(event.target.value, eligeEdad3.value, eligeVisual3.value)
+    PuestoPeligrar3(event.target.value, eligeEdad3.value, eligeVisual3.value, eligeSector3.value)
     if(event.target.value==""){
         event.target.value="No ha contestado."
     }
 },false)
 eligeVisual3.addEventListener("change", (event)=>{
-    PuestoPeligrar3( eligeSexo3.value, eligeEdad3.value, event.target.value)
+    PuestoPeligrar3( eligeSexo3.value, eligeEdad3.value, event.target.value, eligeSector3.value)
 })
 eligeEdad3.addEventListener("change",(event)=>{
-    PuestoPeligrar3( eligeSexo3.value, event.target.value, eligeVisual3.value)
+    PuestoPeligrar3( eligeSexo3.value, event.target.value, eligeVisual3.value, eligeSector3.value)
 },false)
 
 eligeSector3.addEventListener("change", (event)=>{
