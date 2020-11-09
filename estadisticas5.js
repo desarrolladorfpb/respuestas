@@ -67,17 +67,17 @@ eligeSexo5.addEventListener("change",(event)=>{
     if(event.target.value=="No ha contestado."){
         event.target.value=""
     }
-    PuestoPeligrar5(event.target.value, eligeEdad5.value, eligeVisual5.value)
+    PuestoPeligrar5(event.target.value, eligeEdad5.value, eligeVisual5.value, eligeSector5.value)
     if(event.target.value==""){
         event.target.value="No ha contestado."
     }
 },false)
 eligeVisual5.addEventListener("change", (event)=>{
-    PuestoPeligrar5( eligeSexo5.value, eligeEdad5.value, event.target.value)
+    PuestoPeligrar5( eligeSexo5.value, eligeEdad5.value, event.target.value, eligeSector5.value)
 })
 eligeEdad5.addEventListener("change",(event)=>{
     console.log(eligeVisual.value)
-    PuestoPeligrar5( eligeSexo5.value, event.target.value, eligeVisual5.value)
+    PuestoPeligrar5( eligeSexo5.value, event.target.value, eligeVisual5.value, eligeSector5.value)
 },false)
 
 eligeSector5.addEventListener("change", (event)=>{
