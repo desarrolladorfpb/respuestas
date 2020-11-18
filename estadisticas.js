@@ -1,6 +1,5 @@
 
 // ir generando canvas
-var nc = 0; 
 function recogeSectores(){
     let lista = document.getElementsByTagName("tr");
     

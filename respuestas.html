@@ -1,27 +1,77 @@
 <!DOCTYPE html> 
 <html> 
   <head> 
+    <link rel="icon" type="image/png" href="votacion.png">
+
     <title>Resultados encuestas TIS</title> 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
-      body{
-        scroll-behavior: smooth;
-      }
+      
       a{
         color: black;
       }
       a:hover{
         color:paleturquoise;
       }
-      
+      html, body {
+        height: 100%;
+    }
+      .containerComentarios{
+        margin-bottom: 300px;
+      }
+      .marco{
+        position:absolute;
+        height: 300px;
+        overflow: auto;
+      }
       .comentario{
         border-radius: 20px 10px 40px 30px; 
-        height: 50px;
-        border: 5px inset #006699; width: 100%; padding: 5px 20px 10px 50px;
-        text-align: center;
+        border: 5px inset #006699; 
+        margin-bottom: 5px;
+        padding: 5px 20px 10px 50px;
+        text-align: justify;
         vertical-align: middle;
-        
+      }
+      .comentarioFuera{
+        border-radius: 20px 10px 40px 30px; 
+        border: 5px inset #a088009f; 
+        margin-bottom: 5px;
+        padding: 5px 20px 10px 50px;
+        text-align: justify;
+        vertical-align: middle;
+      }
+      .title{
+        font-size: 6vh;
+        font-weight: bolder;
+      }
+      
+      .comentarioPositivo{
+        border-radius: 20px 10px 40px 30px; 
+        border: 5px inset #c901b8; 
+        margin-bottom: 5px;
+        padding: 5px 20px 10px 50px;
+        text-align: justify;
+        vertical-align: middle;
+      }
+      .comentarioDestacado{
+        border-radius: 20px 10px 40px 30px; 
+        border: 5px inset #990000; 
+        margin-bottom: 5px;
+        padding: 5px 20px 10px 50px;
+        text-align: justify;
+        vertical-align: middle;
+      }
+      @media only screen and (max-width: 600px) {
+        body{
+          margin-left: 5px;
+          margin-right: 5px;
+        }
+        .title{
+        font-size: 4vh;
+        font-weight: bolder;
+      }
+      
       }
     </style>
 </head> 
@@ -35,7 +85,40 @@
 </div>
 </div>
 <div class="container">   
-  <div class="row justify-content-center" style="font-size: 6vh;font-weight: bolder;"> Resultados encuesta </div>
+  <div class="row justify-content-center"> <span class="title" >Resultados encuesta</span> </div>
+  <div id="agrupacion" class="row justify-content-center" style="font-weight: bolder;">
+    
+    Perfil de la gente encuestada:
+  </div>
+  <div class="row justify-content-center" >
+    Elegir agrupación:
+  </div>
+  <div class="row justify-content-center">
+      <select id="eligeAgrupacion" style="width: 20%;">
+        <option selected>Edad</option>
+        <option>Género</option>
+        <option>Sector</option>
+      </select>
+
+      
+  </div>
+
+  <div class="row justify-content-center">
+    Número de respuestas<div id="totalRespuestasGenteEncuestada" style="font-weight: bolder;"> </div>
+  </div>
+
+    <div id="generadorPorcentajes"></div>
+    <div class="row justify-content-center">
+    visualización: <select id="eligeVisualAgrupacion" style="width: 20%; margin-left: 2%;">
+      <option selected>pie</option>
+      <option>bar</option>
+      <option>doughnut</option>
+    </select>
+  </div>
+
+
+  <hr>
+
   <div id="Pregunta1" class="row justify-content-center" style="font-weight: bolder;">
     
     Pregunta 1: ¿Has visto tu puesto de trabajo amenazado por la tecnología en algún momento? 
@@ -87,14 +170,29 @@
   </div>
     <div id="generador"></div>
     <div class="row justify-content-center">
-    visualización: <select id="eligeVisual" style="width: 10%; margin-left: 2%;">
+    visualización: <select id="eligeVisual" style="width: 20%; margin-left: 2%;">
       <option selected>pie</option>
       <option>bar</option>
       <option>doughnut</option>
     </select>
   </div>
 
+  <hr>
 
+  <div id="ComentariosAmenazado" class="row justify-content-center" style="font-weight: bolder;">
+    Comentarios sobre la razón de sentirse amenazado 
+  </div>
+  <div class="row justify-content-center" style="font-weight: bolder;">
+    <span class="comentarioDestacado"> comentario destacado</span>
+    <span class="comentario"> comentario normal</span>
+    <span class="comentarioFuera"> comentario fuera de tema</span>
+  </div>
+  
+  <div class="row justify-content-start" >
+    <div class="col-12" style="margin-bottom: 300px;">
+      <div id="marcoAmenaza" class="marco" style="width: 100%;"></div>
+    </div>
+  </div>
   <hr>
 
 
@@ -147,7 +245,7 @@
   </div>
     <div id="generador2"></div>
     <div class="row justify-content-center">
-    visualización: <select id="eligeVisual2" style="width: 10%; margin-left: 2%;">
+    visualización: <select id="eligeVisual2" style="width: 20%; margin-left: 2%;">
       <option selected>pie</option>
       <option>bar</option>
       <option>doughnut</option>
@@ -264,7 +362,7 @@
   </div>
     <div id="generador4"></div>
     <div class="row justify-content-center">
-    visualización: <select id="eligeVisual4" style="width: 10%; margin-left: 2%;">
+    visualización: <select id="eligeVisual4" style="width: 20%; margin-left: 2%;">
       <option selected >pie</option>
       <option>bar</option>
       <option>doughnut</option>
@@ -275,7 +373,6 @@
 
   <div id="Pregunta5" class="row justify-content-center" style="font-weight: bolder;">
     Pregunta 5: ¿Si has ido al Burger King, KFC o McDonald's prefieres pedir con una persona o con la pantalla?
-
   </div>
   <div class="row justify-content-center" >
     Agrupar por sexo y/o edad:
@@ -322,21 +419,58 @@
   </div>
     <div id="generador5"></div>
     <div class="row justify-content-center">
-    visualización: <select id="eligeVisual5" style="width: 10%; margin-left: 2%;">
+    visualización: <select id="eligeVisual5" style="width: 20%; margin-left: 2%;">
       <option selected >pie</option>
       <option>bar</option>
       <option>doughnut</option>
     </select>
-  </div>  
+  </div>
+
+  <hr>
+
+  <div id="ComentariosTecnologia" class="row justify-content-center" style="font-weight: bolder;">
+    Comentarios sobre que harías como empresario:
+  </div>
+  <div class="row justify-content-center" style="font-weight: bolder;">
+    <span class="comentarioDestacado">Destacados</span>
+    <span class="comentario">Normales</span>
+    <span class="comentarioFuera">Fuera de tema</span>
+  </div>
+  <div class="row justify-content-start" >
+    <div class="col-12" style="margin-bottom: 300px;">
+      <div id="marcoTecnologia" class="marco" style="width: 100%;"></div>
+    </div>
+  </div>
+
+  <hr> 
+
+  <div id="otrosComentarios" class="row justify-content-center" style="font-weight: bolder;">
+    Otros comentarios:
+  </div>
+  <div class="row justify-content-center" style="font-weight: bolder;">
+    <span class="comentarioDestacado">Negativo</span>
+    <span class="comentario">Relacionados</span>
+    <span class="comentarioPositivo">Positivos</span>
+    <span class="comentarioFuera">Divertidos</span>
+  </div>
+  <div class="row justify-content-start" >
+    <div class="col-12" style="margin-bottom: 300px;">
+      <div id="marcoOtros" class="marco" style="width: 100%;"></div>
+    </div>
+  </div>
+
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="./genteEncuestada.js"></script>
 <script src="./estadisticas.js"></script>
+<script src="./comentariosAmenaza.js"></script>
 <script src="./estadisticas2.js"></script>
 <script src="./estadisticas3.js"></script>
 <script src="./estadisticas4.js"></script>
 <script src="./estadisticas5.js"></script>
-
+<script src="./comentariosTecnologia.js"></script>
+<script src="./otrosComentarios.js"></script>
 <script>
 
     

@@ -1,6 +1,5 @@
 
 // ir generando canvas
-var nc = 0; 
 function PuestoPeligrar5(genero, vejez, visual, sectorElegido){
     
     nc++;
